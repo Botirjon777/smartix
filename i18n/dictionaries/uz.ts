@@ -3,6 +3,18 @@ const uz = {
     title: "SmartIX — Aqlli dasturiy yechimlar",
     description:
       "SmartIX — biznesingizni raqamli kelajakka olib chiquvchi dasturiy taʼminot kompaniyasi. Veb, mobil, backend va bulutli yechimlar.",
+    keywords: [
+      "SmartIX",
+      "dasturiy taʼminot",
+      "veb ishlab chiqish",
+      "mobil ilovalar",
+      "backend",
+      "API",
+      "bulutli yechimlar",
+      "IT kompaniya Oʻzbekiston",
+      "sayt yaratish",
+      "dasturlash",
+    ],
   },
   nav: {
     home: "Bosh sahifa",

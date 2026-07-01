@@ -23,17 +23,71 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+const SITE_URL = "https://smartix.uz";
+
+const ogLocaleMap: Record<Locale, string> = {
+  uz: "uz_UZ",
+  ru: "ru_RU",
+  en: "en_US",
+};
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const dict = getDictionary(isLocale(locale) ? locale : "uz");
+  const typed = isLocale(locale) ? locale : "uz";
+  const dict = getDictionary(typed);
+
   return {
-    title: dict.meta.title,
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: dict.meta.title,
+      template: "%s | SmartIX",
+    },
     description: dict.meta.description,
-    icons: { icon: "/favicon.ico" },
+    keywords: dict.meta.keywords,
+    applicationName: "SmartIX",
+    authors: [{ name: "SmartIX" }],
+    creator: "SmartIX",
+    publisher: "SmartIX",
+    alternates: {
+      canonical: `/${typed}`,
+      languages: {
+        uz: "/uz",
+        ru: "/ru",
+        en: "/en",
+        "x-default": "/uz",
+      },
+    },
+    openGraph: {
+      type: "website",
+      siteName: "SmartIX",
+      title: dict.meta.title,
+      description: dict.meta.description,
+      url: `${SITE_URL}/${typed}`,
+      locale: ogLocaleMap[typed],
+      alternateLocale: locales
+        .filter((l) => l !== typed)
+        .map((l) => ogLocaleMap[l]),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    category: "technology",
   };
 }
 
@@ -50,12 +104,37 @@ export default async function LocaleLayout({
   const typedLocale = locale as Locale;
   const dict = getDictionary(typedLocale);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "SmartIX",
+    url: `${SITE_URL}/${typedLocale}`,
+    logo: `${SITE_URL}/icon.svg`,
+    description: dict.meta.description,
+    email: dict.cta.email,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Tashkent",
+      addressCountry: "UZ",
+    },
+    member: dict.team.members.map((m) => ({
+      "@type": "Person",
+      name: m.name,
+      jobTitle: m.role,
+    })),
+    sameAs: [] as string[],
+  };
+
   return (
     <html
       lang={typedLocale}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="relative flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <I18nProvider locale={typedLocale} dict={dict}>
           <Background />
           <Navbar />

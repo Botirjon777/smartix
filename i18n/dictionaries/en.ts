@@ -5,6 +5,18 @@ const en: Dictionary = {
     title: "SmartIX — Smart software solutions",
     description:
       "SmartIX is a software development company that takes your business into the digital future. Web, mobile, backend and cloud solutions.",
+    keywords: [
+      "SmartIX",
+      "software development",
+      "web development",
+      "mobile apps",
+      "backend",
+      "API",
+      "cloud solutions",
+      "IT company Uzbekistan",
+      "website development",
+      "software engineering",
+    ],
   },
   nav: {
     home: "Home",
