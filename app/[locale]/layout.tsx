@@ -150,7 +150,7 @@ export default async function LocaleLayout({
           <Background />
           <Navbar />
           <main className="flex-1">{children}</main>
-          <Footer />
+          <Footer dict={dict} locale={typedLocale} />
         </I18nProvider>
       </body>
     </html>

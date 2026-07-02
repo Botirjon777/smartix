@@ -1,14 +1,10 @@
-"use client";
-
-import { useI18n } from "@/i18n/I18nProvider";
+import type { Dictionary } from "@/i18n/getDictionary";
 import { site } from "@/lib/site";
 import Reveal from "../Reveal";
 import ContactForm from "../ContactForm";
 import { TelegramIcon, CheckIcon } from "../icons";
 
-export default function CTA() {
-  const { dict } = useI18n();
-
+export default function CTA({ dict }: { dict: Dictionary }) {
   return (
     <section id="contact" className="relative scroll-mt-24 py-14 md:py-20">
       <div className="mx-auto w-full px-5 sm:px-8 lg:px-16 xl:px-24">

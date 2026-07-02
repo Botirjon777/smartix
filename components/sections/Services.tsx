@@ -1,6 +1,4 @@
-"use client";
-
-import { useI18n } from "@/i18n/I18nProvider";
+import type { Dictionary } from "@/i18n/getDictionary";
 import Reveal from "../Reveal";
 import SectionHeading from "../SectionHeading";
 import {
@@ -21,9 +19,7 @@ const icons = [
   ChatIcon,
 ];
 
-export default function Services() {
-  const { dict } = useI18n();
-
+export default function Services({ dict }: { dict: Dictionary }) {
   return (
     <section id="services" className="relative scroll-mt-24 py-14 md:py-20">
       <div className="mx-auto w-full px-5 sm:px-8 lg:px-16 xl:px-24">

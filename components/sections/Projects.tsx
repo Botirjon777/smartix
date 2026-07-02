@@ -1,14 +1,18 @@
-"use client";
-
-import { useI18n } from "@/i18n/I18nProvider";
+import type { Dictionary } from "@/i18n/getDictionary";
+import type { Locale } from "@/i18n/config";
 import Reveal from "../Reveal";
 import SectionHeading from "../SectionHeading";
 import ProjectCard from "../ProjectCard";
 import { ArrowRightIcon } from "../icons";
 import { getAllProjects } from "@/lib/projects";
 
-export default function Projects() {
-  const { dict, locale } = useI18n();
+export default function Projects({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) {
   const projects = getAllProjects();
 
   return (

@@ -1,6 +1,4 @@
-"use client";
-
-import { useI18n } from "@/i18n/I18nProvider";
+import type { Dictionary } from "@/i18n/getDictionary";
 import Reveal from "../Reveal";
 import SectionHeading from "../SectionHeading";
 import { GithubIcon, LinkedinIcon, TelegramIcon } from "../icons";
@@ -23,9 +21,7 @@ const meta = [
   },
 ];
 
-export default function Team() {
-  const { dict } = useI18n();
-
+export default function Team({ dict }: { dict: Dictionary }) {
   return (
     <section id="team" className="relative scroll-mt-24 py-14 md:py-20">
       <div className="mx-auto w-full px-5 sm:px-8 lg:px-16 xl:px-24">

@@ -1,6 +1,4 @@
-"use client";
-
-import { useI18n } from "@/i18n/I18nProvider";
+import type { Dictionary } from "@/i18n/getDictionary";
 import Reveal from "../Reveal";
 import SectionHeading from "../SectionHeading";
 import ProgressBar from "../ProgressBar";
@@ -45,8 +43,7 @@ function FlowArrow() {
   );
 }
 
-export default function Board() {
-  const { dict } = useI18n();
+export default function Board({ dict }: { dict: Dictionary }) {
   const { board } = dict;
 
   return (

@@ -1,6 +1,4 @@
-"use client";
-
-import { useI18n } from "@/i18n/I18nProvider";
+import type { Dictionary } from "@/i18n/getDictionary";
 import { site } from "@/lib/site";
 import Reveal from "../Reveal";
 import CountUp from "../CountUp";
@@ -13,9 +11,7 @@ const stats = [
   { key: "support", end: 24, suffix: "/7" },
 ] as const;
 
-export default function Hero() {
-  const { dict } = useI18n();
-
+export default function Hero({ dict }: { dict: Dictionary }) {
   return (
     <section id="home" className="relative overflow-hidden pt-28 md:pt-36">
       <div className="mx-auto w-full px-5 sm:px-8 lg:px-16 xl:px-24">

@@ -1,6 +1,5 @@
-"use client";
-
-import { useI18n } from "@/i18n/I18nProvider";
+import type { Dictionary } from "@/i18n/getDictionary";
+import type { Locale } from "@/i18n/config";
 import { site } from "@/lib/site";
 import Logo from "../Logo";
 import {
@@ -11,15 +10,21 @@ import {
   TelegramIcon,
 } from "../icons";
 
-export default function Footer() {
-  const { dict } = useI18n();
+export default function Footer({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) {
   const year = 2026;
 
   const links = [
-    { href: "#services", label: dict.nav.services },
-    { href: "#why", label: dict.nav.why },
-    { href: "#team", label: dict.nav.team },
-    { href: "#contact", label: dict.nav.contact },
+    { href: `/${locale}#services`, label: dict.nav.services },
+    { href: `/${locale}/projects`, label: dict.nav.projects },
+    { href: `/${locale}#why`, label: dict.nav.why },
+    { href: `/${locale}#team`, label: dict.nav.team },
+    { href: `/${locale}#contact`, label: dict.nav.contact },
   ];
 
   return (
