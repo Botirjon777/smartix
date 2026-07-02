@@ -1,9 +1,10 @@
 "use client";
 
 import { useI18n } from "@/i18n/I18nProvider";
+import { site } from "@/lib/site";
 import Reveal from "../Reveal";
 import CountUp from "../CountUp";
-import { ArrowRightIcon, BoltIcon } from "../icons";
+import { ArrowRightIcon, BoltIcon, TelegramIcon } from "../icons";
 
 const stats = [
   { key: "projects", end: 40, suffix: "+" },
@@ -12,30 +13,17 @@ const stats = [
   { key: "support", end: 24, suffix: "/7" },
 ] as const;
 
-const techs = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Node.js",
-  "Python",
-  "PostgreSQL",
-  "Docker",
-  "AWS",
-  "Flutter",
-  "Tailwind",
-];
-
 export default function Hero() {
   const { dict } = useI18n();
 
   return (
     <section id="home" className="relative overflow-hidden pt-28 md:pt-36">
-      <div className="mx-auto max-w-6xl px-5">
+      <div className="mx-auto w-full px-5 sm:px-8 lg:px-16 xl:px-24">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           {/* Left */}
           <div className="text-center lg:text-left">
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-muted">
+              <span className="inline-flex items-center gap-2 rounded-full border border-line bg-fill px-4 py-1.5 text-xs font-medium text-muted">
                 <BoltIcon className="h-3.5 w-3.5 text-accent" />
                 {dict.hero.badge}
               </span>
@@ -58,17 +46,20 @@ export default function Hero() {
             <Reveal delay={250}>
               <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:justify-start">
                 <a
-                  href="#contact"
+                  href={site.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand to-brand-2 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-brand/30 transition hover:shadow-brand/50 sm:w-auto"
                 >
+                  <TelegramIcon className="h-4 w-4" />
                   {dict.hero.ctaPrimary}
-                  <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
                 <a
-                  href="#services"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-semibold text-foreground transition hover:border-white/30 hover:bg-white/10 sm:w-auto"
+                  href="#board"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-line bg-fill px-6 py-3.5 text-sm font-semibold text-foreground transition hover:border-line-strong hover:bg-fill-strong sm:w-auto"
                 >
                   {dict.hero.ctaSecondary}
+                  <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </div>
             </Reveal>
@@ -94,12 +85,12 @@ export default function Hero() {
           <Reveal delay={200} className="relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-brand/30 via-brand-2/20 to-accent/20 blur-2xl" />
-              <div className="glass overflow-hidden rounded-2xl shadow-2xl">
-                <div className="flex items-center gap-2 border-b border-white/10 bg-white/5 px-4 py-3">
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0b0e1e] text-[#e7e9f5] shadow-2xl backdrop-blur">
+                <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-4 py-3">
                   <span className="h-3 w-3 rounded-full bg-red-400/80" />
                   <span className="h-3 w-3 rounded-full bg-yellow-400/80" />
                   <span className="h-3 w-3 rounded-full bg-green-400/80" />
-                  <span className="ml-3 font-mono text-xs text-muted">
+                  <span className="ml-3 font-mono text-xs text-[#9aa0c3]">
                     smartix.ts
                   </span>
                 </div>
@@ -136,13 +127,13 @@ export default function Hero() {
               </div>
 
               {/* floating badge */}
-              <div className="absolute -right-3 -top-3 hidden animate-float rounded-2xl border border-white/10 bg-surface-2/90 px-4 py-2.5 shadow-xl backdrop-blur sm:block">
+              <div className="absolute -right-3 -top-3 hidden animate-float rounded-2xl border border-line bg-surface-2/90 px-4 py-2.5 shadow-xl backdrop-blur sm:block">
                 <p className="text-xs text-muted">Deploy</p>
-                <p className="text-sm font-semibold text-emerald-300">
+                <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-300">
                   ● Live
                 </p>
               </div>
-              <div className="absolute -bottom-4 -left-4 hidden animate-float-slow rounded-2xl border border-white/10 bg-surface-2/90 px-4 py-2.5 shadow-xl backdrop-blur sm:block">
+              <div className="absolute -bottom-4 -left-4 hidden animate-float-slow rounded-2xl border border-line bg-surface-2/90 px-4 py-2.5 shadow-xl backdrop-blur sm:block">
                 <p className="text-xs text-muted">Performance</p>
                 <p className="text-sm font-semibold text-gradient">99 / 100</p>
               </div>
@@ -150,19 +141,17 @@ export default function Hero() {
           </Reveal>
         </div>
 
-        {/* Tech marquee */}
-        <div className="relative mt-20 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-          <div className="flex w-max animate-marquee gap-4">
-            {[...techs, ...techs].map((tech, i) => (
-              <span
-                key={`${tech}-${i}`}
-                className="whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-medium text-muted"
-              >
-                {tech}
+        {/* Trust row */}
+        <Reveal delay={120}>
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-muted lg:justify-start">
+            {dict.hero.trust.map((item) => (
+              <span key={item} className="inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand" />
+                {item}
               </span>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

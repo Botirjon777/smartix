@@ -43,7 +43,7 @@ export default function LanguageSwitcher() {
         onClick={() => setOpen((v) => !v)}
         aria-label="Change language"
         aria-expanded={open}
-        className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-foreground transition hover:border-brand/50 hover:bg-white/10"
+        className="flex items-center gap-2 rounded-full border border-line bg-fill px-3 py-2 text-sm font-medium text-foreground transition hover:border-brand/50 hover:bg-fill-strong"
       >
         <GlobeIcon className="h-4 w-4 text-brand" />
         <span className="hidden sm:inline">{localeFlags[locale]}</span>
@@ -51,7 +51,7 @@ export default function LanguageSwitcher() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-white/10 bg-surface-2/95 p-1.5 shadow-2xl backdrop-blur-xl">
+        <div className="absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl border border-line bg-surface-2/95 p-1.5 shadow-2xl backdrop-blur-xl">
           {locales.map((code) => (
             <button
               key={code}
@@ -60,7 +60,7 @@ export default function LanguageSwitcher() {
               className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm transition ${
                 code === locale
                   ? "bg-brand/15 text-foreground"
-                  : "text-muted hover:bg-white/5 hover:text-foreground"
+                  : "text-muted hover:bg-fill hover:text-foreground"
               }`}
             >
               <span className="text-base">{localeFlags[code]}</span>

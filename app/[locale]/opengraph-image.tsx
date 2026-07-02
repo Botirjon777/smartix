@@ -9,7 +9,7 @@ export const contentType = "image/png";
 export const alt = "SmartIX — Smart software solutions";
 
 const logoData = readFileSync(
-  join(process.cwd(), "public/assets/logo/logo-text.png")
+  join(process.cwd(), "public/assets/logo/logo-text-light.png")
 );
 const logoSrc = `data:image/png;base64,${logoData.toString("base64")}`;
 

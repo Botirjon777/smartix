@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/i18n/I18nProvider";
+import { site } from "@/lib/site";
 import Logo from "../Logo";
 import {
   MailIcon,
@@ -22,8 +23,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative mt-auto border-t border-white/10 bg-surface/40">
-      <div className="mx-auto max-w-6xl px-5 py-14">
+    <footer className="relative mt-auto border-t border-line bg-surface/40">
+      <div className="mx-auto w-full px-5 sm:px-8 lg:px-16 xl:px-24 py-14">
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
           {/* Brand */}
           <div>
@@ -32,12 +33,18 @@ export default function Footer() {
               {dict.footer.tagline}
             </p>
             <div className="mt-5 flex items-center gap-2">
-              {[GithubIcon, LinkedinIcon, TelegramIcon].map((Icon, i) => (
+              {[
+                { Icon: TelegramIcon, href: site.telegram },
+                { Icon: GithubIcon, href: "#" },
+                { Icon: LinkedinIcon, href: "#" },
+              ].map(({ Icon, href }, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   aria-label="SmartIX social link"
-                  className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/5 text-muted transition hover:border-brand/50 hover:text-foreground"
+                  className="grid h-9 w-9 place-items-center rounded-full border border-line bg-fill text-muted transition hover:border-brand/50 hover:text-foreground"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -72,6 +79,17 @@ export default function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-muted">
               <li>
                 <a
+                  href={site.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 transition hover:text-foreground"
+                >
+                  <TelegramIcon className="h-4 w-4 text-brand" />
+                  {site.telegramHandle}
+                </a>
+              </li>
+              <li>
+                <a
                   href={`mailto:${dict.cta.email}`}
                   className="flex items-center gap-2.5 transition hover:text-foreground"
                 >
@@ -87,7 +105,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center text-xs text-muted sm:flex-row sm:text-left">
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-line pt-6 text-center text-xs text-muted sm:flex-row sm:text-left">
           <p>
             © {year} SmartIX. {dict.footer.rights}
           </p>

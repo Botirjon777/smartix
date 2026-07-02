@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
+import { cookies } from "next/headers";
+import Script from "next/script";
 import "../globals.css";
 import { locales, isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
@@ -104,6 +106,9 @@ export default async function LocaleLayout({
   const typedLocale = locale as Locale;
   const dict = getDictionary(typedLocale);
 
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme")?.value === "light" ? "light" : "dark";
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -125,12 +130,18 @@ export default async function LocaleLayout({
     sameAs: [] as string[],
   };
 
+  const themeInit = `(function(){try{var m=document.cookie.match(/(?:^|; )theme=(dark|light)/);var th=m?m[1]:(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');var el=document.documentElement;el.classList.remove('dark','light');el.classList.add(th);el.style.colorScheme=th;if(!m){document.cookie='theme='+th+';path=/;max-age=31536000;samesite=lax';}}catch(e){}})();`;
+
   return (
     <html
       lang={typedLocale}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${theme} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="relative flex min-h-full flex-col">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInit}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

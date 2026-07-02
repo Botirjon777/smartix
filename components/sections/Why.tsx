@@ -11,21 +11,21 @@ export default function Why() {
   const { dict } = useI18n();
 
   return (
-    <section id="why" className="relative scroll-mt-24 py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-5">
+    <section id="why" className="relative scroll-mt-24 py-14 md:py-20">
+      <div className="mx-auto w-full px-5 sm:px-8 lg:px-16 xl:px-24">
         <SectionHeading
           badge={dict.why.badge}
           title={dict.why.title}
           subtitle={dict.why.subtitle}
         />
 
-        <div className="mt-16 grid gap-5 md:grid-cols-2">
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
           {dict.why.items.map((item, i) => {
             const Icon = icons[i] ?? BoltIcon;
             return (
               <Reveal key={item.title} delay={(i % 2) * 100}>
-                <article className="card-hover flex h-full items-start gap-5 rounded-2xl border border-white/10 bg-surface/60 p-6 sm:p-7">
-                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-brand/20 to-brand-2/20 text-brand ring-1 ring-white/10">
+                <article className="card-hover flex h-full items-start gap-5 rounded-2xl border border-line bg-surface/60 p-6 sm:p-7">
+                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-brand/20 to-brand-2/20 text-brand ring-1 ring-line">
                     <Icon className="h-7 w-7" />
                   </span>
                   <div>

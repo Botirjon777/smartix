@@ -1,47 +1,65 @@
 "use client";
 
 import { useI18n } from "@/i18n/I18nProvider";
+import { site } from "@/lib/site";
 import Reveal from "../Reveal";
-import { MailIcon, ArrowRightIcon } from "../icons";
+import ContactForm from "../ContactForm";
+import { TelegramIcon, CheckIcon } from "../icons";
 
 export default function CTA() {
   const { dict } = useI18n();
 
   return (
-    <section id="contact" className="relative scroll-mt-24 py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-5">
+    <section id="contact" className="relative scroll-mt-24 py-14 md:py-20">
+      <div className="mx-auto w-full px-5 sm:px-8 lg:px-16 xl:px-24">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-surface/70 px-6 py-14 text-center sm:px-12 sm:py-20">
-            {/* glow */}
-            <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-brand/30 blur-[100px]" />
-            <div className="absolute inset-0 grid-bg opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-line bg-surface/70">
+            <div className="grid lg:grid-cols-2">
+              {/* Left — pitch + checklist */}
+              <div className="relative p-8 sm:p-10 lg:p-12">
+                <div className="absolute -left-10 -top-16 h-56 w-56 rounded-full bg-brand/30 blur-[90px]" />
+                <div className="absolute inset-0 grid-bg opacity-30 [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]" />
 
-            <div className="relative">
-              <span className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand">
-                {dict.cta.badge}
-              </span>
-              <h2 className="mx-auto mt-6 max-w-2xl text-balance text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-                {dict.cta.title}
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-pretty text-base text-muted sm:text-lg">
-                {dict.cta.subtitle}
-              </p>
+                <div className="relative">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand">
+                    {dict.cta.badge}
+                  </span>
+                  <h2 className="mt-5 text-balance text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+                    {dict.cta.title}
+                  </h2>
+                  <p className="mt-3 text-pretty text-sm text-muted sm:text-base">
+                    {dict.cta.subtitle}
+                  </p>
 
-              <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <a
-                  href={`mailto:${dict.cta.email}`}
-                  className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand to-brand-2 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-brand/30 transition hover:shadow-brand/50 sm:w-auto"
-                >
-                  {dict.cta.button}
-                  <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </a>
-                <a
-                  href={`mailto:${dict.cta.email}`}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-foreground transition hover:border-white/30 hover:bg-white/10 sm:w-auto"
-                >
-                  <MailIcon className="h-4 w-4 text-brand" />
-                  {dict.cta.email}
-                </a>
+                  <ul className="mt-7 space-y-3.5">
+                    {dict.cta.points.map((point) => (
+                      <li key={point} className="flex items-center gap-3 text-sm">
+                        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-400/15 text-emerald-600 dark:text-emerald-300">
+                          <CheckIcon className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="text-foreground">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p className="mt-8 text-sm text-muted">
+                    {dict.cta.form.or}{" "}
+                    <a
+                      href={site.telegram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-medium text-brand hover:underline"
+                    >
+                      <TelegramIcon className="h-4 w-4" />
+                      {site.telegramHandle}
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              {/* Right — form */}
+              <div className="border-t border-line bg-background/40 p-8 sm:p-10 lg:border-l lg:border-t-0 lg:p-12">
+                <ContactForm />
               </div>
             </div>
           </div>

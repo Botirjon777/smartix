@@ -27,26 +27,26 @@ export default function Team() {
   const { dict } = useI18n();
 
   return (
-    <section id="team" className="relative scroll-mt-24 py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-5">
+    <section id="team" className="relative scroll-mt-24 py-14 md:py-20">
+      <div className="mx-auto w-full px-5 sm:px-8 lg:px-16 xl:px-24">
         <SectionHeading
           badge={dict.team.badge}
           title={dict.team.title}
           subtitle={dict.team.subtitle}
         />
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {dict.team.members.map((member, i) => {
             const m = meta[i] ?? meta[0];
             return (
               <Reveal key={member.name} delay={i * 110}>
-                <article className="group card-hover relative h-full overflow-hidden rounded-3xl border border-white/10 bg-surface/60 p-7 text-center">
+                <article className="group card-hover relative h-full overflow-hidden rounded-3xl border border-line bg-surface/60 p-7 text-center">
                   <div
                     className={`absolute inset-x-0 top-0 h-28 bg-gradient-to-br ${m.gradient} opacity-15 blur-2xl transition group-hover:opacity-30`}
                   />
                   <div className="relative">
                     <div
-                      className={`mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br ${m.gradient} text-2xl font-bold text-white shadow-xl ring-4 ring-white/10 transition-transform duration-500 group-hover:scale-105`}
+                      className={`mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br ${m.gradient} text-2xl font-bold text-white shadow-xl ring-4 ring-line transition-transform duration-500 group-hover:scale-105`}
                     >
                       {m.initials}
                     </div>
@@ -68,7 +68,7 @@ export default function Team() {
                           key={label}
                           href={href}
                           aria-label={`${member.name} — ${label}`}
-                          className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/5 text-muted transition hover:border-brand/50 hover:text-foreground"
+                          className="grid h-9 w-9 place-items-center rounded-full border border-line bg-fill text-muted transition hover:border-brand/50 hover:text-foreground"
                         >
                           <Icon className="h-4 w-4" />
                         </a>

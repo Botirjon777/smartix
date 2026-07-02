@@ -7,14 +7,27 @@ export default function Logo({
   className?: string;
   priority?: boolean;
 }) {
+  const shadow = "drop-shadow-[0_2px_12px_rgba(79,124,255,0.25)]";
   return (
-    <Image
-      src="/assets/logo/logo-text.png"
-      alt="SmartIX"
-      width={1510}
-      height={420}
-      priority={priority}
-      className={`${className} drop-shadow-[0_2px_12px_rgba(79,124,255,0.25)]`}
-    />
+    <>
+      {/* light theme: dark wordmark */}
+      <Image
+        src="/assets/logo/logo-text.png"
+        alt="SmartIX"
+        width={1510}
+        height={420}
+        priority={priority}
+        className={`${className} ${shadow} block dark:hidden`}
+      />
+      {/* dark theme: white wordmark */}
+      <Image
+        src="/assets/logo/logo-text-light.png"
+        alt="SmartIX"
+        width={1510}
+        height={420}
+        priority={priority}
+        className={`${className} ${shadow} hidden dark:block`}
+      />
+    </>
   );
 }

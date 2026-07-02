@@ -4,10 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 export default function CountUp({
   end,
+  prefix = "",
   suffix = "",
   duration = 1600,
 }: {
   end: number;
+  prefix?: string;
   suffix?: string;
   duration?: number;
 }) {
@@ -26,7 +28,7 @@ export default function CountUp({
             started.current = true;
             const startTime = performance.now();
             const tick = (now: number) => {
-              const progress = Math.min((now - startTime) / duration, 1);
+              const progress = Math.min(Math.max((now - startTime) / duration, 0), 1);
               const eased = 1 - Math.pow(1 - progress, 3);
               setValue(Math.round(eased * end));
               if (progress < 1) requestAnimationFrame(tick);
@@ -44,6 +46,7 @@ export default function CountUp({
 
   return (
     <span ref={ref}>
+      {prefix}
       {value}
       {suffix}
     </span>
