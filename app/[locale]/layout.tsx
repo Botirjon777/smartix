@@ -109,7 +109,7 @@ export default async function LocaleLayout({
     "@type": "Organization",
     name: "SmartIX",
     url: `${SITE_URL}/${typedLocale}`,
-    logo: `${SITE_URL}/icon.svg`,
+    logo: `${SITE_URL}/assets/logo/logo-square.png`,
     description: dict.meta.description,
     email: dict.cta.email,
     address: {

@@ -42,7 +42,7 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-18">
         <a href="#home" className="shrink-0" aria-label="SmartIX home">
-          <Logo />
+          <Logo priority />
         </a>
 
         <div className="hidden items-center gap-1 md:flex">
