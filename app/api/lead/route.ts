@@ -1,6 +1,6 @@
 import type { LeadPayload } from "@/lib/leads";
 
-export const runtime = "nodejs";
+export const runtime = "edge";
 
 /** Escape user-provided text for Telegram HTML parse_mode. */
 function escapeHtml(input: string): string {

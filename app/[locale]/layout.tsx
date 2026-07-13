@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
-import { cookies } from "next/headers";
 import Script from "next/script";
 import "../globals.css";
 import { locales, isLocale, type Locale } from "@/i18n/config";
@@ -106,8 +105,7 @@ export default async function LocaleLayout({
   const typedLocale = locale as Locale;
   const dict = getDictionary(typedLocale);
 
-  const cookieStore = await cookies();
-  const theme = cookieStore.get("theme")?.value === "light" ? "light" : "dark";
+  const theme = "dark";
 
   const jsonLd = {
     "@context": "https://schema.org",
